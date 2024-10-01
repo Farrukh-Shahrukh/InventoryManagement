@@ -8,7 +8,7 @@ namespace InventoryManagement.Server.Data.Models
     {
        
         public DateTime Date { get; set; }
-        public BigInteger Amount { get; set; }
+        public Int64 Amount { get; set; }
         public string Description { get; set; }
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
