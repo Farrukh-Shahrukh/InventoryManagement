@@ -61,6 +61,7 @@ namespace InventoryManagement.Server
             app.MapFallbackToFile("/index.html");
 
             app.Run();
+
         }
     }
 }
