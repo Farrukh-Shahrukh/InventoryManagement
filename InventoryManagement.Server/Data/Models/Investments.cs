@@ -11,12 +11,12 @@ namespace InventoryManagement.Server.Data.Models
         public Int64 Amount { get; set; }
         public string Description { get; set; }
         [ForeignKey("Project")]
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
 
         [ForeignKey("Investors")]
         public int InvestorId { get; set; }
 
         public Projects Project { get; set; }
-        public Investors  Investor { get; set; }
+        public Investors Investor { get; set; }
     }
 }

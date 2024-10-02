@@ -6,12 +6,12 @@ using InventoryManagement.Server.Models;
 
 namespace InventoryManagement.Server.Services
 {
-    public class Investmentservice : IInvestmentsService
+    public class InvestmentService : IInvestmentService
     {
 
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-        public Investmentservice(ApplicationDbContext context, IMapper mapper)
+        public InvestmentService(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -33,23 +33,28 @@ namespace InventoryManagement.Server.Services
         }
         public InvestmentsDTO CreateInvestments(InvestmentsDTO InvestmentsDto)
         {
-            var Investments = _mapper.Map<Investments>(InvestmentsDto);
-            _context.Investments.Add(Investments);
+            var investment = _mapper.Map<Investments>(InvestmentsDto);
+            investment.CreatedDate = DateTime.Now;
+            investment.publicId = Guid.NewGuid();
+
+            _context.Investments.Add(investment);
             _context.SaveChanges();
-            return _mapper.Map<InvestmentsDTO>(Investments);
+            return _mapper.Map<InvestmentsDTO>(investment);
         }
 
         public InvestmentsDTO UpdateInvestments(int id, InvestmentsDTO InvestmentsDto)
         {
-            var Investments = _context.Investments.FirstOrDefault(p => p.Id == id);
-            if (Investments == null)
+            var investment = _context.Investments.FirstOrDefault(p => p.Id == id);
+            if (investment == null)
             {
                 throw new Exception("Investments not found");
             }
 
-            _mapper.Map(InvestmentsDto, Investments);
+            _mapper.Map(InvestmentsDto, investment);
+            investment.UpdatedDate = DateTime.Now;
+
             _context.SaveChanges();
-            return _mapper.Map<InvestmentsDTO>(Investments);
+            return _mapper.Map<InvestmentsDTO>(investment);
         }
 
         public void DeleteInvestments(int id)

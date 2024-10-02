@@ -1,25 +1,31 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ProductsComponent } from '../products/products.component';
+import { ProductsComponent } from './products/products.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module'; // Import routing module
 import { FormsModule } from '@angular/forms';
-import { ChartsComponent } from './charts/charts.component'; // Import FormsModule
+import { ChartsComponent } from './charts/charts.component';
+import { InvestorComponent } from './investor/investor.component';
+import { InvestmentComponent } from './investment/investment.component'; // Import FormsModule
 
-const routes: Routes = [
-  { path: 'products', component: ProductsComponent },
-  { path: '', redirectTo: '/app-root', pathMatch: 'full' },
-];
+// const routes: Routes = [
+//   { path: 'investors', component: InvestorComponent },
+//   { path: 'products', component: ProductsComponent },
+//   { path: 'charts', component: ChartsComponent },
+//   { path: '', redirectTo: '/investors', pathMatch: 'full' }, // Correct default redirect
+// ];
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
-    ChartsComponent
+    ChartsComponent,
+    InvestorComponent,
+    InvestmentComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

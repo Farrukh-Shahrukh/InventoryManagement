@@ -3,7 +3,7 @@ using InventoryManagement.Server.Models;
 
 namespace InventoryManagement.Server.Services
 {
-    public interface IInvestorsService
+    public interface IInvestorService
     {
         public List<InvestorsDTO> GetAllInvestors();
         public InvestorsDTO GetInvestorsById(int id);

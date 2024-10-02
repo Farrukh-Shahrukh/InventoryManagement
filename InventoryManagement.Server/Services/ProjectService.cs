@@ -5,12 +5,12 @@ using InventoryManagement.Server.Data.Models;
 
 namespace InventoryManagement.Server.Services
 {
-    public class Projectervice : IProjectService
+    public class ProjectService : IProjectService
     {
 
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-        public Projectervice(ApplicationDbContext context, IMapper mapper)
+        public ProjectService(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

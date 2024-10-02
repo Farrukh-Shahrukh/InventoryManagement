@@ -48,7 +48,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ExpenceTypes");
+                    b.ToTable("ExpenceTypes", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Expences", b =>
@@ -96,7 +96,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Expences");
+                    b.ToTable("Expences", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Investments", b =>
@@ -141,7 +141,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Investments");
+                    b.ToTable("Investments", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Investors", b =>
@@ -174,7 +174,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Investors");
+                    b.ToTable("Investors", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Ladger", b =>
@@ -217,7 +217,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasIndex("InvestorId");
 
-                    b.ToTable("Ladger");
+                    b.ToTable("Ladger", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Product", b =>
@@ -240,7 +240,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasKey("ProductID");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Projects", b =>
@@ -273,7 +273,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Purchase", b =>
@@ -300,7 +300,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Purchases");
+                    b.ToTable("Purchases", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Sale", b =>
@@ -327,7 +327,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sales", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.User", b =>
@@ -379,7 +379,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("InventoryManagement.Server.Data.Models.Expences", b =>

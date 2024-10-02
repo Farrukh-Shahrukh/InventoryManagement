@@ -10,8 +10,8 @@ namespace InventoryManagement.Server.Controllers
     public class InvestmentsController : ControllerBase
     {
 
-        private readonly IInvestmentsService _Investmentservice;
-        public InvestmentsController(IInvestmentsService Investmentservice)
+        private readonly IInvestmentService _Investmentservice;
+        public InvestmentsController(IInvestmentService Investmentservice)
         {
             _Investmentservice = Investmentservice;
         }

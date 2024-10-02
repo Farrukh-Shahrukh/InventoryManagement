@@ -1,0 +1,62 @@
+<div class="container">
+    <h3>Investments for {{ investorName }}</h3>
+    <div class="row">
+      <!-- Form Section -->
+      <div class="col-md-4">
+        <div class="toast-container">
+          <ngb-toast *ngIf="showToastFlag" [ngClass]="{'toast-success': toastType === 'success', 'toast-error': toastType === 'error'}" [autohide]="true" [delay]="3000" (hidden)="showToastFlag = false">
+            {{ toastMessage }}
+          </ngb-toast>
+        </div>
+  
+        <form (ngSubmit)="saveInvestment()" #investmentForm="ngForm">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" required [(ngModel)]="newInvestment.date" name="date">
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" required [(ngModel)]="newInvestment.amount" name="amount">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" [(ngModel)]="newInvestment.description" name="description">
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!investmentForm.form.valid">
+            {{ isEditing ? 'Update Investment' : 'Add Investment' }}
+          </button>
+        </form>
+      </div>
+  
+      <!-- Table Section -->
+      <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
+        <div class="spinner-border" role="status"></div>
+      </div>
+      <div *ngIf="investments.length > 0" class="col-md-8">
+        <table class="table outer-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Description</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let investment of investments">
+              <td>{{ investment.date | date }}</td>
+              <td>{{ investment.amount }}</td>
+              <td>{{ investment.description }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                  <button class="btn btn-primary mx-1" (click)="editInvestment(investment)">Edit</button>
+                  <button class="btn btn-danger mx-1" (click)="deleteInvestment(investment.id)">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
