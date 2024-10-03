@@ -32,23 +32,28 @@ namespace InventoryManagement.Server.Services
         }
         public ExpenceTypesDTO CreateExpenceTypes(ExpenceTypesDTO ExpenceTypesDto)
         {
-            var Project = _mapper.Map<ExpenceTypes>(ExpenceTypesDto);
-            _context.ExpenceTypes.Add(Project);
+            var expenseType = _mapper.Map<ExpenceTypes>(ExpenceTypesDto);
+            expenseType.CreatedDate = DateTime.Now;
+            expenseType.publicId = Guid.NewGuid();
+
+            _context.ExpenceTypes.Add(expenseType);
             _context.SaveChanges();
-            return _mapper.Map<ExpenceTypesDTO>(Project);
+            return _mapper.Map<ExpenceTypesDTO>(expenseType);
         }
 
         public ExpenceTypesDTO UpdateExpenceTypes(int id, ExpenceTypesDTO ExpenceTypesDto)
         {
-            var ExpenceTypes = _context.ExpenceTypes.FirstOrDefault(p => p.Id == id);
-            if (ExpenceTypes == null)
+            var expenseType = _context.ExpenceTypes.FirstOrDefault(p => p.Id == id);
+            if (expenseType == null)
             {
                 throw new Exception("ExpenceTypes not found");
             }
 
-            _mapper.Map(ExpenceTypesDto, ExpenceTypes);
+            _mapper.Map(ExpenceTypesDto, expenseType);
+            expenseType.UpdatedDate = DateTime.Now;
+
             _context.SaveChanges();
-            return _mapper.Map<ExpenceTypesDTO>(ExpenceTypes);
+            return _mapper.Map<ExpenceTypesDTO>(expenseType);
         }
 
         public void DeleteExpenceTypes(int id)

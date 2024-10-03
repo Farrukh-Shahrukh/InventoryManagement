@@ -10,7 +10,10 @@ import { AppRoutingModule } from './app-routing.module'; // Import routing modul
 import { FormsModule } from '@angular/forms';
 import { ChartsComponent } from './charts/charts.component';
 import { InvestorComponent } from './investor/investor.component';
-import { InvestmentComponent } from './investment/investment.component'; // Import FormsModule
+import { InvestmentComponent } from './investment/investment.component';
+import { ProjectComponent } from './project/project.component';
+import { ExpenseComponent } from './expense/expense.component';
+import { ExpenseTypeComponent } from './expense-type/expense-type.component'; // Import FormsModule
 
 // const routes: Routes = [
 //   { path: 'investors', component: InvestorComponent },
@@ -25,7 +28,10 @@ import { InvestmentComponent } from './investment/investment.component'; // Impo
     ProductsComponent,
     ChartsComponent,
     InvestorComponent,
-    InvestmentComponent
+    InvestmentComponent,
+    ProjectComponent,
+    ExpenseComponent,
+    ExpenseTypeComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

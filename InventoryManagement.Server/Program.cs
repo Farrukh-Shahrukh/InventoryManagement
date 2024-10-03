@@ -28,6 +28,7 @@ namespace InventoryManagement.Server
             builder.Services.AddScoped<IInvestorService, InvestorService>();
             builder.Services.AddScoped<IInvestmentService, InvestmentService>();
             builder.Services.AddScoped<IExpenceTypeService, ExpenceTypeService>();
+            builder.Services.AddScoped<IExpenseService, ExpenseService>();
 
             builder.Services.AddCors(options =>
             {

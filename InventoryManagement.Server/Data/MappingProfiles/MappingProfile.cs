@@ -44,7 +44,8 @@ namespace InventoryManagement.Server.Data.MappingProfiles
 
             CreateMap<Expences, ExpencesDTO>()
                .ReverseMap()
-               .ForMember(dest => dest.Project, opt => opt.Ignore());
+               .ForMember(dest => dest.Project, opt => opt.Ignore())
+                .ForMember(dest => dest.ExpenceTypes, opt => opt.Ignore());
 
             CreateMap<Purchase, PurchaseDTO>()
                 .ForMember(dest=>dest.ProductName, opt=>opt.MapFrom(src=>src.Product.Name))

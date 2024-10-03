@@ -4,6 +4,7 @@ using InventoryManagement.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManagement.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241003110625_somefix")]
+    partial class somefix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +75,7 @@ namespace InventoryManagement.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ExpenceTypeId")
+                    b.Property<int>("ExpenceTypesId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -89,7 +92,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpenceTypeId");
+                    b.HasIndex("ExpenceTypesId");
 
                     b.HasIndex("ProjectId");
 
@@ -383,7 +386,7 @@ namespace InventoryManagement.Server.Migrations
                 {
                     b.HasOne("InventoryManagement.Server.Data.Models.ExpenceTypes", "ExpenceTypes")
                         .WithMany("Expences")
-                        .HasForeignKey("ExpenceTypeId")
+                        .HasForeignKey("ExpenceTypesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

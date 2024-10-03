@@ -32,23 +32,28 @@ namespace InventoryManagement.Server.Services
         }
         public ProjectsDTO CreateProjects(ProjectsDTO ProjectsDto)
         {
-            var Project = _mapper.Map<Projects>(ProjectsDto);
-            _context.Projects.Add(Project);
+            var project = _mapper.Map<Projects>(ProjectsDto);
+            project.CreatedDate = DateTime.Now;
+            project.publicId = Guid.NewGuid();
+
+            _context.Projects.Add(project);
             _context.SaveChanges();
-            return _mapper.Map<ProjectsDTO>(Project);
+            return _mapper.Map<ProjectsDTO>(project);
         }
 
         public ProjectsDTO UpdateProjects(int id, ProjectsDTO ProjectsDto)
         {
-            var Projects = _context.Projects.FirstOrDefault(p => p.Id == id);
-            if (Projects == null)
+            var project = _context.Projects.FirstOrDefault(p => p.Id == id);
+            if (project == null)
             {
                 throw new Exception("Projects not found");
             }
 
-            _mapper.Map(ProjectsDto, Projects);
+            _mapper.Map(ProjectsDto, project);
+            project.UpdatedDate = DateTime.Now;
+
             _context.SaveChanges();
-            return _mapper.Map<ProjectsDTO>(Projects);
+            return _mapper.Map<ProjectsDTO>(project);
         }
 
         public void DeleteProjects(int id)
