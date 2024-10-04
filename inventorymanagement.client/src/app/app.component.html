@@ -8,17 +8,20 @@
     <a class="nav-link" [routerLink]="['/projects']" routerLinkActive="active">Projects</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" [routerLink]="['/investments']" routerLinkActive="active">Investments</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" [routerLink]="['/expenses']" routerLinkActive="active">Expenses</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" [routerLink]="['/expenseTypes']" routerLinkActive="active">Expense Types</a>
   </li>
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" [routerLink]="['/charts']" routerLinkActive="active">Charts</a>
-  </li>
+  </li> -->
 </ul>
 <div class="container">
   <router-outlet></router-outlet> <!-- Router outlet for loading routed components -->

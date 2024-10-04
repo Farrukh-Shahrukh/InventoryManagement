@@ -1,18 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Investment } from '../../Models/investment.model';
 import { InvestmentService } from '../../services/investment-service/investment.service';
+import { InvestorService } from '../../services/investor-service/investor.service';
 import { ActivatedRoute } from '@angular/router';
+import { Investor } from '../../Models/investor.model';
+import { ProjectService } from '../../services/project-service/project.service';
+import { Project } from '../../Models/project.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-investment',
   templateUrl: './investment.component.html',
 })
 export class InvestmentComponent implements OnInit {
+  @ViewChild('updateModal') updateModal!: TemplateRef<any>;
   public investments: Investment[] = [];
   public newInvestment: Investment = new Investment();
+  public selectedInvestment: Investment = new Investment();
   public isEditing: boolean = false;
   public investorName: string = '';
   public investorId: number = 0;
+  public investors: { id: number, name: string }[] = []; // For investor dropdown
+  public projects: { id: number, name: string }[] = []; // For project dropdown
   toastMessage: string = '';
   showToastFlag: boolean = false;
   toastType: string = '';
@@ -20,7 +29,10 @@ export class InvestmentComponent implements OnInit {
 
   constructor(
     private investmentService: InvestmentService,
-    private route: ActivatedRoute
+    private investorService: InvestorService,
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -28,14 +40,45 @@ export class InvestmentComponent implements OnInit {
       this.investorId = +params['investorId'];
       this.investorName = params['investorName'];
     });
+    if (!this.investorId) {
+      this.loadInvestors();
+    }
     this.loadInvestments();
+    this.loadProjects();
   }
-
+  loadInvestors(): void {
+    this.isLoading = true;
+    this.investorService.getInvestors().subscribe(
+      (data: Investor[]) => {
+        this.investors= data.map(investor => ({ id: investor.id, name: investor.name }));
+        this.isLoading = false;
+      },
+      error => {
+        this.showToast('Error loading investors', 'error');
+        this.isLoading = false;
+      }
+    );
+  }
+  loadProjects(): void {
+    this.isLoading = true;
+    this.projectService.getProjects().subscribe(
+      (data: Project[]) => {
+        this.projects = data.map(project => ({ id: project.id, name: project.name }));
+        this.isLoading = false;
+      },
+      error => {
+        this.showToast('Error loading projects', 'error');
+        this.isLoading = false;
+      }
+    );
+  }
   loadInvestments(): void {
     this.isLoading = true;
     this.investmentService.getInvestments().subscribe(
       (data: Investment[]) => {
-        this.investments = data.filter(investment => investment.investorId === this.investorId);
+        this.investments = data;
+        if(this.investorId)
+          this.investments = data.filter(investment => investment.investorId === this.investorId);
         this.isLoading = false;
       },
       error => {
@@ -97,5 +140,10 @@ export class InvestmentComponent implements OnInit {
     this.toastType = type;
     this.showToastFlag = true;
     setTimeout(() => this.showToastFlag = false, 3000);
+  }
+  openUpdateModal(investment: Investment): void {
+    this.selectedInvestment = { ...investment };
+    this.modalService.open(this.updateModal);
+    this.isEditing = true;
   }
 }
