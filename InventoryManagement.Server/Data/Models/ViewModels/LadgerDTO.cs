@@ -1,6 +1,6 @@
 ﻿namespace InventoryManagement.Server.Data.Models.ViewModels
 {
-    public class LadgerDTO
+    public class LadgerDTO : BaseDTO
     {
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
