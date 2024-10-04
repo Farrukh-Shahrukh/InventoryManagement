@@ -20,7 +20,6 @@ export class InvestmentService {
   }
 
   createInvestment(investment: Investment): Observable<Investment> {
-    debugger
     return this.http.post<Investment>(this.apiUrl, investment);
   }
 
