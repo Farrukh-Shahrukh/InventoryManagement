@@ -1,28 +1,30 @@
-﻿<h1 id="tableLabel">Inventory Management System</h1>
+﻿<div class="background">
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar flex-column p-3" id="sidebarMenu">
+    <h5 class="text-center">Menu</h5>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/investors']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Investors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/projects']" routerLinkActive="active">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/investments']" routerLinkActive="active">Investments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/expenses']" routerLinkActive="active">Expenses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/expenseTypes']" routerLinkActive="active">Expense Types</a>
+      </li>
+    </ul>
+  </div>
 
-<ul class="nav nav-tabs justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/investors']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Investors</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/projects']" routerLinkActive="active">Projects</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/investments']" routerLinkActive="active">Investments</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/expenses']" routerLinkActive="active">Expenses</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/expenseTypes']" routerLinkActive="active">Expense Types</a>
-  </li>
-  <!-- <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">Products</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/charts']" routerLinkActive="active">Charts</a>
-  </li> -->
-</ul>
-<div class="container">
-  <router-outlet></router-outlet> <!-- Router outlet for loading routed components -->
+  <!-- Main content -->
+  <div class="content-area flex-grow-1 p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 </div>

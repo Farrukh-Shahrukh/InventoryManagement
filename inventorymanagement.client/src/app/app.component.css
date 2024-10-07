@@ -1,14 +1,78 @@
-﻿:host {
-    max-width: 1280px;
-    padding: 2rem;
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.background {
+    height: 100%;
+    background: linear-gradient(to bottom, #003366 30%, #f4f6f9 30%); /* Dark Blue (#003366) for the top 30% and Light Gray (#f4f6f9) for the remaining */
+}
+
+.d-flex {
+    min-height: 100vh;
+    display: flex; /* Ensure flex layout for sidebar and content */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #ffffff; /* White background for sidebar */
+    border-right: 1px solid #dee2e6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Rounded corners */
+    margin: 1rem;
+    position: relative; /* Necessary for absolute positioning of toggle button */
+}
+
+.sidebar .nav-item {
+    margin-bottom: 1rem; /* Spacing between menu items */
+}
+
+.nav-link {
+    padding: 0.75rem 1rem;
+    color: #495057;
+    border-radius: 5px;
     text-align: center;
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.nav-link.active {
+    background-color: #e9ecef;
+    color: #003366; /* Use Dark Blue for active links */
 }
 
-table {
-    margin: 0 auto;
+.nav-link:hover {
+    background-color: #e9ecef;
+    color: #003366; /* Use Dark Blue for hovered links */
+}
+
+.content-area {
+    flex-grow: 1;
+    padding: 2rem;
+    background-color: #ffffff; /* Keep the white background for the content area */
+    border-radius: 10px; /* Rounded corners */
+    margin: 1rem;
+    margin-top: 2rem; /* Add some top margin to move it down */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Even shadow on all sides */
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    cursor: pointer;
+    color: #495057; /* Match sidebar text color */
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+        border-right: none;
+    }
+
+    .sidebar-toggle {
+        display: block; /* Show toggle button on small screens */
+    }
 }

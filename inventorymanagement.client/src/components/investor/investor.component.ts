@@ -25,9 +25,9 @@ export class InvestorComponent {
     private modalService: NgbModal,
     private router: Router) { }
 
-  ngOnInit(): void {
-    this.loadInvestors();
-  }
+    ngOnInit(): void {
+      this.loadInvestors();
+    }
 
   loadInvestors(): void {
     this.isLoading = true;
@@ -70,7 +70,6 @@ export class InvestorComponent {
   }
 
   openUpdateModal(investor: Investor) {
-    console.log(investor)
     this.selectedInvestor = { ...investor };
     this.modalService.open(this.updateModal);
     this.isEditing = true;

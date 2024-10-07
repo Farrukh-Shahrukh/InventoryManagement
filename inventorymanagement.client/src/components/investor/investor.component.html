@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <!-- Form Section -->
+    <div class="col-md-4">
+      <div class="card rounded shadow">
+        <div class="card-body">
+          <div class="toast-container">
+            <ngb-toast *ngIf="showToastFlag" [ngClass]="{'toast-success': toastType === 'success', 'toast-error': toastType === 'error'}" [autohide]="true" [delay]="3000" (hidden)="showToastFlag = false">
+              {{ toastMessage }}
+            </ngb-toast>
+          </div>
+
+          <form (ngSubmit)="saveInvestor()" #investorForm="ngForm">
+            <div class="form-group">
+              <label for="name">Investor Name</label>
+              <input type="text" class="form-control" id="name" required [(ngModel)]="newInvestor.name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="description">CNIC</label>
+              <input class="form-control" id="cnic" required [(ngModel)]="newInvestor.cnic" name="cnic">
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!investorForm.form.valid">{{ 'Add Investor' }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
+      <div class="spinner-border" role="status">
+      </div>
+    </div>
+    <div *ngIf="investors.length > 0" class="col-md-8">
+      <div class="card rounded shadow">
+        <div class="card-body">
+          <table class="table table-hover table-striped" *ngIf="investors">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">CNIC</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let investor of investors">
+                <td>{{ investor.name }}</td>
+                <td>{{ investor.cnic }}</td>
+                <td>
+                  <div class="btn-group" role="group" aria-label="Investor Actions">
+                    <button class="btn btn-primary mx-1" (click)="openUpdateModal(investor)">Edit</button>
+                    <button class="btn btn-outline-success mx-1" (click)="addInvestments(investor)">Add Investments</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #updateModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update Investor</h4>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="updateInvestor(modal)" #updateForm="ngForm">
+      <div class="form-group">
+        <label for="name">Investor Name</label>
+        <input type="text" class="form-control" id="name" required [(ngModel)]="selectedInvestor.name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="cnic">CNIC</label>
+        <input type="text" class="form-control" id="cnic" required [(ngModel)]="selectedInvestor.cnic" name="cnic">
+      </div>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Update Investor</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
