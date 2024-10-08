@@ -7,19 +7,19 @@ namespace InventoryManagement.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExpenceTypeController : ControllerBase
+    public class ExpenseTypeController : ControllerBase
     {
 
 
-        private readonly IExpenceTypeService _ExpenceTypeervice;
-        public ExpenceTypeController(IExpenceTypeService ExpenceTypeervice)
+        private readonly IExpenceTypeService _ExpenseTypeService;
+        public ExpenseTypeController(IExpenceTypeService ExpenseTypeService)
         {
-            _ExpenceTypeervice = ExpenceTypeervice;
+            _ExpenseTypeService = ExpenseTypeService;
         }
-        [HttpGet(Name = "GetAllExpenceType")]
+        [HttpGet(Name = "GetAllExpenseType")]
         public IActionResult Get()
         {
-            return Ok(_ExpenceTypeervice.GetAllExpenceTypes());
+            return Ok(_ExpenseTypeService.GetAllExpenceTypes());
         }
         [HttpPost]
         public IActionResult Create([FromBody] ExpenceTypesDTO ExpenceTypeDto)
@@ -29,14 +29,14 @@ namespace InventoryManagement.Server.Controllers
                 return BadRequest("ExpenceType data is null.");
             }
 
-            var createdExpenceType = _ExpenceTypeervice.CreateExpenceTypes(ExpenceTypeDto);
+            var createdExpenceType = _ExpenseTypeService.CreateExpenceTypes(ExpenceTypeDto);
             return CreatedAtRoute("GetExpenceTypeById", new { id = createdExpenceType.Id }, createdExpenceType);
         }
 
         [HttpGet("{id}", Name = "GetExpenceTypeById")]
         public IActionResult Get(int id)
         {
-            var ExpenceType = _ExpenceTypeervice.GetExpenceTypesById(id);
+            var ExpenceType = _ExpenseTypeService.GetExpenceTypesById(id);
             if (ExpenceType == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace InventoryManagement.Server.Controllers
                 return BadRequest("ExpenceType data is invalid.");
             }
 
-            var updatedExpenceType = _ExpenceTypeervice.UpdateExpenceTypes(id, ExpenceTypeDto);
+            var updatedExpenceType = _ExpenseTypeService.UpdateExpenceTypes(id, ExpenceTypeDto);
             if (updatedExpenceType == null)
             {
                 return NotFound();
@@ -65,13 +65,13 @@ namespace InventoryManagement.Server.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var ExpenceType = _ExpenceTypeervice.GetExpenceTypesById(id);
+            var ExpenceType = _ExpenseTypeService.GetExpenceTypesById(id);
             if (ExpenceType == null)
             {
                 return NotFound();
             }
 
-            _ExpenceTypeervice.DeleteExpenceTypes(id);
+            _ExpenseTypeService.DeleteExpenceTypes(id);
             return NoContent();
         }
     }

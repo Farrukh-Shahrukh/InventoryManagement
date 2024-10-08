@@ -6,7 +6,7 @@ using InventoryManagement.Server.Models;
 
 namespace InventoryManagement.Server.Services
 {
-    public class InvestorService : IInvestorsService
+    public class InvestorService : IInvestorService
     {
 
         private readonly ApplicationDbContext _context;
@@ -19,8 +19,8 @@ namespace InventoryManagement.Server.Services
        
         public List<InvestorsDTO> GetAllInvestors()
         {
-            var Investorss = _context.Investors.Where(W=> !W.IsDeleted).ToList();
-            return _mapper.Map<List<InvestorsDTO>>(Investorss);
+            var Investors = _context.Investors.Where(W=> !W.IsDeleted).ToList();
+            return _mapper.Map<List<InvestorsDTO>>(Investors);
         }
         public InvestorsDTO GetInvestorsById(int id)
         {
@@ -33,23 +33,28 @@ namespace InventoryManagement.Server.Services
         }
         public InvestorsDTO CreateInvestors(InvestorsDTO InvestorsDto)
         {
-            var Investors = _mapper.Map<Investors>(InvestorsDto);
-            _context.Investors.Add(Investors);
+            var Investor = _mapper.Map<Investors>(InvestorsDto);
+            Investor.CreatedDate = DateTime.Now;
+            Investor.publicId = Guid.NewGuid();
+
+            _context.Investors.Add(Investor);
             _context.SaveChanges();
-            return _mapper.Map<InvestorsDTO>(Investors);
+            return _mapper.Map<InvestorsDTO>(Investor);
         }
 
         public InvestorsDTO UpdateInvestors(int id, InvestorsDTO InvestorsDto)
         {
-            var Investors = _context.Investors.FirstOrDefault(p => p.Id == id);
-            if (Investors == null)
+            var investor = _context.Investors.FirstOrDefault(p => p.Id == id);
+            if (investor == null)
             {
                 throw new Exception("Investors not found");
             }
 
-            _mapper.Map(InvestorsDto, Investors);
+            _mapper.Map(InvestorsDto, investor);
+            investor.UpdatedDate = DateTime.Now;
+
             _context.SaveChanges();
-            return _mapper.Map<InvestorsDTO>(Investors);
+            return _mapper.Map<InvestorsDTO>(investor);
         }
 
         public void DeleteInvestors(int id)

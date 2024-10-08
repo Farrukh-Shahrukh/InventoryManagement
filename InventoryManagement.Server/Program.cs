@@ -61,6 +61,12 @@ namespace InventoryManagement.Server
             builder.Services.AddScoped<ISaleService, SaleService>();
             builder.Services.AddScoped<IPurchaseService, PurchaseService>();
 
+            builder.Services.AddScoped<IProjectService, ProjectService>();
+            builder.Services.AddScoped<IInvestorService, InvestorService>();
+            builder.Services.AddScoped<IInvestmentService, InvestmentService>();
+            builder.Services.AddScoped<IExpenceTypeService, ExpenceTypeService>();
+            builder.Services.AddScoped<IExpenseService, ExpenseService>();
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigins",

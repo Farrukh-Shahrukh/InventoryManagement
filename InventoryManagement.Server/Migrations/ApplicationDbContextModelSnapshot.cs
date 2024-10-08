@@ -75,9 +75,6 @@ namespace InventoryManagement.Server.Migrations
                     b.Property<int>("ExpenceTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExpenceTypesId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -92,7 +89,7 @@ namespace InventoryManagement.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpenceTypesId");
+                    b.HasIndex("ExpenceTypeId");
 
                     b.HasIndex("ProjectId");
 
@@ -394,7 +391,7 @@ namespace InventoryManagement.Server.Migrations
                 {
                     b.HasOne("InventoryManagement.Server.Data.Models.ExpenceTypes", "ExpenceTypes")
                         .WithMany("Expences")
-                        .HasForeignKey("ExpenceTypesId")
+                        .HasForeignKey("ExpenceTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

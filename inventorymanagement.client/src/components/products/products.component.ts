@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, TemplateRef} from '@angular/core';
-import { Product } from '../Models/product.model';
-import { ProductService } from '../services/product-service/product.service';
-import { SaleService } from '../services/sale-service/sale.service';
-import { PurchaseService } from '../services/purchase-service/purchase.service';
+import { Product } from '../../Models/product.model';
+import { ProductService } from '../../services/product-service/product.service';
+import { SaleService } from '../../services/sale-service/sale.service';
+import { PurchaseService } from '../../services/purchase-service/purchase.service';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

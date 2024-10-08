@@ -1,0 +1,144 @@
+<div class="container">
+    <!-- <h3 *ngIf="investorId">Investments for {{ investorName }}</h3> -->
+    <div class="row">
+      <!-- Form Section -->
+      <div class="col-md-4">
+        <div class="toast-container">
+          <ngb-toast *ngIf="showToastFlag" [ngClass]="{'toast-success': toastType === 'success', 'toast-error': toastType === 'error'}" [autohide]="true" [delay]="3000" (hidden)="showToastFlag = false">
+            {{ toastMessage }}
+          </ngb-toast>
+        </div>
+        <div class="card rounded shadow">
+          <div class="card-body">
+            <form (ngSubmit)="saveInvestment()" #investmentForm="ngForm">
+                <!-- Investor Section -->
+                <div class="form-group">
+                  <label for="project">Investor</label>
+                  
+                  <!-- If projectId is available, show read-only field -->
+                  <input *ngIf="investorId" type="text" class="form-control readonly-field" id="investor" [value]="investorName" readonly>
+                  
+                  <!-- If no projectId, show a dropdown -->
+                  <select *ngIf="!investorId" class="form-control" [(ngModel)]="newInvestment.investorId" name="investor" required>
+                    <option *ngFor="let investor of investors" [value]="investor.id">{{ investor.name }}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="expenseType">Project</label>
+                  <select class="form-control" [(ngModel)]="newInvestment.projectId" name="project" required>
+                    <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+                  </select>
+                </div>
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" required [(ngModel)]="newInvestment.date" name="date">
+              </div>
+              <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" class="form-control" id="amount" required [(ngModel)]="newInvestment.amount" name="amount">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" required [(ngModel)]="newInvestment.description" name="description">
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!investmentForm.form.valid">
+                Add Investment
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Table Section -->
+      <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
+        <div class="spinner-grow text-primary" role="status"></div>
+      </div>
+      <div *ngIf="investments.length > 0" class="col-md-8">
+        <h6 *ngIf="investorId" >
+          <span class="custom-badge">
+            Investments of <strong class="investor-name">{{ investorName }}</strong>
+          </span>
+        </h6>
+        <div class="card rounded shadow">
+          <div class="card-body">
+            <table class="table custom-style">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let investment of investments">
+                  <td>{{ investment.date | date }}</td>
+                  <td>{{ investment.amount }}</td>
+                  <td>{{ investment.description }}</td>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-primary mx-1" (click)="openUpdateModal(investment)">Edit</button>
+                      <button class="btn btn-danger mx-1" (click)="deleteInvestment(investment.id)">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Update Investment Modal -->
+<ng-template #updateModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update Investment</h4>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="updateInvestment(modal)" #updateInvestmentForm="ngForm">
+      
+      <!-- Date Field -->
+      <div class="form-group">
+        <label for="date">Investment Date</label>
+        <input type="date" class="form-control" id="date" required [(ngModel)]="selectedInvestment.date" name="date">
+      </div>
+
+      <!-- Amount Field -->
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="number" class="form-control" id="amount" required [(ngModel)]="selectedInvestment.amount" name="amount">
+      </div>
+
+      <!-- Description Field -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" required [(ngModel)]="selectedInvestment.description" name="description">
+      </div>
+
+      <!-- Project Dropdown -->
+      <div class="form-group">
+        <label for="project">Project</label>
+        <select class="form-control" required [(ngModel)]="selectedInvestment.projectId" name="project">
+          <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+        </select>
+      </div>
+
+      <!-- Investor Dropdown (optional if investorId is not provided via queryParams) -->
+      <div *ngIf="!investorId" class="form-group">
+        <label for="investor">Investor</label>
+        <select class="form-control" required [(ngModel)]="selectedInvestment.investorId" name="investor">
+          <option *ngFor="let investor of investors" [value]="investor.id">{{ investor.name }}</option>
+        </select>
+      </div>
+
+      <!-- Modal Buttons -->
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary" [disabled]="!updateInvestmentForm.form.valid">Update Investment</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+    </div>
+  </div>
+  

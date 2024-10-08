@@ -10,8 +10,8 @@ namespace InventoryManagement.Server.Controllers
     [ApiController]
     public class InvestorController : ControllerBase
     {
-        private readonly IInvestorsService _Investorservice;
-        public InvestorController(IInvestorsService Investorservice)
+        private readonly IInvestorService _Investorservice;
+        public InvestorController(IInvestorService Investorservice)
         {
             _Investorservice = Investorservice;
         }

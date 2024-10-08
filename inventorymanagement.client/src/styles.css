@@ -1,1 +1,151 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui;
+}
+
+.background {
+  height: 100%;
+  background: linear-gradient(to bottom, #003366 30%, #f4f6f9 30%); /* Dark Blue (#003366) for the top 30% and Light Gray (#f4f6f9) for the remaining */
+}
+
+.d-flex {
+  min-height: 100vh;
+  display: flex; /* Ensure flex layout for sidebar and content */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #ffffff; /* White background for sidebar */
+  border-right: 1px solid #dee2e6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Rounded corners */
+  margin: 1rem;
+  position: relative; /* Necessary for absolute positioning of toggle button */
+}
+
+.sidebar .nav-item {
+  margin-bottom: 1rem; /* Spacing between menu items */
+}
+
+.nav-link {
+  padding: 0.75rem 1rem;
+  color: #495057;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.nav-link.active {
+  background-color: #e9ecef;
+  color: #003366; /* Use Dark Blue for active links */
+}
+
+.nav-link:hover {
+  background-color: #e9ecef;
+  color: #003366; /* Use Dark Blue for hovered links */
+}
+
+.content-area {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: #ffffff; /* Keep the white background for the content area */
+  border-radius: 10px; /* Rounded corners */
+  margin: 1rem;
+  margin-top: 1rem; /* Add some top margin to move it down */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Even shadow on all sides */
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+  cursor: pointer;
+  color: #495057; /* Match sidebar text color */
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+      width: 100%;
+      height: auto;
+      box-shadow: none;
+      border-right: none;
+  }
+
+  .sidebar-toggle {
+      display: block; /* Show toggle button on small screens */
+  }
+}
+
+/* Ensure form-group elements are left-aligned */
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  
+  /* Reset any centering styles applied globally or locally */
+  input, textarea, label {
+    text-align: left; /* Ensure the text within inputs and labels is left-aligned */
+  }
+  
+  /* Optional: Add more specific overrides if there are stronger centering styles */
+  .form-control, .form-group label {
+    text-align: left !important;
+  }
+  .container {
+    margin-top: 20px;
+  }
+  /* styles.css or component-specific CSS file */
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1050;
+  }
+  
+  .toast-success {
+    background-color: #28a745; /* Green */
+    color: white;
+  }
+  
+  .toast-error {
+    background-color: #dc3545; /* Red */
+    color: white;
+  }
+.readonly-field {
+  background-color: #f0f0f0; /* light grey */
+  color: #6c757d; /* grey text color */
+  cursor: not-allowed; /* Indicates it is not interactive */
+  pointer-events: none; /* Disables any mouse interaction */
+}
+.table.custom-style {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  background-color: white;
+  border-radius: 8px; /* Rounded corners */
+}
+
+/* Table header styling */
+.table.custom-style thead th {
+  text-align: left; /* Align text to the left */
+  border-bottom: 1px solid #e0e0e0; /* Lighter border for the header bottom */
+  font-weight: 600; /* Slightly bolder font weight for the header */
+  color: #343a40; /* Darker font color */
+}
+.table.custom-style tbody tr {
+  border-bottom: 1px solid #838282; /* Darker border for the body bottom */
+}
+.custom-badge {
+  display: inline-block;
+  background-color: #f8f9fa; /* Light background similar to the image */
+  padding: 0.5rem 1rem; /* Padding for spacing */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  border-left: 5px solid #1c3664; /* Dark blue vertical line */
+}
+
+.investor-name {
+  font-weight: 700; /* Bold font for the investor name */
+  color: #343a40; /* Darker color to make it stand out */
+}
