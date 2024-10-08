@@ -8,48 +8,55 @@
             {{ toastMessage }}
           </ngb-toast>
         </div>
-  
-        <form (ngSubmit)="saveProject()" #projectForm="ngForm">
-          <div class="form-group">
-            <label for="name">Project Name</label>
-            <input type="text" class="form-control" id="name" required [(ngModel)]="newProject.name" name="name">
+        <div class="card rounded shadow">
+          <div class="card-body">
+            <form (ngSubmit)="saveProject()" #projectForm="ngForm">
+              <div class="form-group">
+                <label for="name">Project Name</label>
+                <input type="text" class="form-control" id="name" required [(ngModel)]="newProject.name" name="name">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" required [(ngModel)]="newProject.description" name="description"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!projectForm.form.valid">Create Project</button>
+            </form>
           </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="description" required [(ngModel)]="newProject.description" name="description"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" [disabled]="!projectForm.form.valid">Create Project</button>
-        </form>
+        </div>
       </div>
   
       <!-- Table Section -->
       <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
-        <div class="spinner-border" role="status"></div>
+        <div class="spinner-grow text-primary" role="status"></div>
       </div>
       
       <div *ngIf="projects.length > 0" class="col-md-8">
-        <table class="table outer-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let project of projects">
-              <td>{{ project.name }}</td>
-              <td>{{ project.description }}</td>
-              <td>
-                <div class="btn-group" role="group" aria-label="Project Actions">
-                  <button class="btn btn-primary mx-1" (click)="openUpdateModal(project)">Edit</button>
-                  <button class="btn btn-outline-success mx-1" (click)="addExpense(project)">Add Expense</button>
-                  <!-- <button class="btn btn-danger mx-1" (click)="deleteProject(project.id)">Delete</button> -->
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="card rounded shadow">
+          <div class="card-body">
+            <table class="table custom-style">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let project of projects">
+                  <td>{{ project.name }}</td>
+                  <td>{{ project.description }}</td>
+                  <td>
+                    <div class="btn-group" role="group" aria-label="Project Actions">
+                      <button class="btn btn-primary mx-1" (click)="openUpdateModal(project)">Edit</button>
+                      <button class="btn btn-outline-success mx-1" (click)="addExpense(project)">Add Expense</button>
+                      <!-- <button class="btn btn-danger mx-1" (click)="deleteProject(project.id)">Delete</button> -->
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
   
       <!-- Update Project Modal -->

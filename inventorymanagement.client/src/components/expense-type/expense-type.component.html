@@ -9,42 +9,50 @@
             {{ toastMessage }}
           </ngb-toast>
         </div>
-  
-        <form (ngSubmit)="saveExpenseType()" #expenseTypeForm="ngForm">
-          <div class="form-group">
-            <label for="name">Expense Type Name</label>
-            <input type="text" class="form-control" id="name" required [(ngModel)]="newExpenseType.name" name="name">
+        <div class="card rounded shadow">
+          <div class="card-body">
+            <form (ngSubmit)="saveExpenseType()" #expenseTypeForm="ngForm">
+              <div class="form-group">
+                <label for="name">Expense Type Name</label>
+                <input type="text" class="form-control" id="name" required [(ngModel)]="newExpenseType.name" name="name">
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!expenseTypeForm.form.valid">
+                Add Expense Type
+              </button>
+            </form>
           </div>
-          <button type="submit" class="btn btn-primary" [disabled]="!expenseTypeForm.form.valid">
-            Add Expense Type
-          </button>
-        </form>
+        </div>
       </div>
   
       <!-- Table Section -->
       <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
-        <div class="spinner-border" role="status"></div>
+        <div class="spinner-grow text-primary" role="status"></div>
       </div>
       <div *ngIf="expenseTypes.length > 0" class="col-md-8">
-        <table class="table outer-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Expense Type Name</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let expenseType of expenseTypes">
-              <td>{{ expenseType.name }}</td>
-              <td>
-                <div class="btn-group" role="group">
-                  <button class="btn btn-primary mx-1" (click)="openUpdateModal(expenseType)">Edit</button>
-                  <button class="btn btn-danger mx-1" (click)="deleteExpenseType(expenseType.id)">Delete</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="card rounded shadow">
+          <div class="card-body">
+            <table class="table custom-style">
+              <thead>
+                <tr>
+                  <th scope="col">Expense Type Name</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let expenseType of expenseTypes">
+                  <td>{{ expenseType.name }}</td>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-primary mx-1" (click)="openUpdateModal(expenseType)">Edit</button>
+                      <button class="btn btn-danger mx-1" (click)="deleteExpenseType(expenseType.id)">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
       </div>
 
         <!-- Update Project Modal -->

@@ -27,13 +27,13 @@
 
     <!-- Table Section -->
     <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
-      <div class="spinner-border" role="status">
+      <div class="spinner-grow text-primary" role="status">
       </div>
     </div>
     <div *ngIf="investors.length > 0" class="col-md-8">
       <div class="card rounded shadow">
         <div class="card-body">
-          <table class="table table-hover table-striped" *ngIf="investors">
+          <table class="table custom-style" *ngIf="investors">
             <thead>
               <tr>
                 <th scope="col">Name</th>

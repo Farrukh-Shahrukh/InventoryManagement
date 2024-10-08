@@ -1,5 +1,5 @@
 <div class="container">
-    <h3 *ngIf="investorId">Investments for {{ investorName }}</h3>
+    <!-- <h3 *ngIf="investorId">Investments for {{ investorName }}</h3> -->
     <div class="row">
       <!-- Form Section -->
       <div class="col-md-4">
@@ -8,72 +8,84 @@
             {{ toastMessage }}
           </ngb-toast>
         </div>
-  
-        <form (ngSubmit)="saveInvestment()" #investmentForm="ngForm">
-            <!-- Investor Section -->
-            <div class="form-group">
-              <label for="project">Investor</label>
-              
-              <!-- If projectId is available, show read-only field -->
-              <input *ngIf="investorId" type="text" class="form-control readonly-field" id="investor" [value]="investorName" readonly>
-              
-              <!-- If no projectId, show a dropdown -->
-              <select *ngIf="!investorId" class="form-control" [(ngModel)]="newInvestment.investorId" name="investor" required>
-                <option *ngFor="let investor of investors" [value]="investor.id">{{ investor.name }}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="expenseType">Project</label>
-              <select class="form-control" [(ngModel)]="newInvestment.projectId" name="project" required>
-                <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
-              </select>
-            </div>
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" required [(ngModel)]="newInvestment.date" name="date">
+        <div class="card rounded shadow">
+          <div class="card-body">
+            <form (ngSubmit)="saveInvestment()" #investmentForm="ngForm">
+                <!-- Investor Section -->
+                <div class="form-group">
+                  <label for="project">Investor</label>
+                  
+                  <!-- If projectId is available, show read-only field -->
+                  <input *ngIf="investorId" type="text" class="form-control readonly-field" id="investor" [value]="investorName" readonly>
+                  
+                  <!-- If no projectId, show a dropdown -->
+                  <select *ngIf="!investorId" class="form-control" [(ngModel)]="newInvestment.investorId" name="investor" required>
+                    <option *ngFor="let investor of investors" [value]="investor.id">{{ investor.name }}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="expenseType">Project</label>
+                  <select class="form-control" [(ngModel)]="newInvestment.projectId" name="project" required>
+                    <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+                  </select>
+                </div>
+              <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" required [(ngModel)]="newInvestment.date" name="date">
+              </div>
+              <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" class="form-control" id="amount" required [(ngModel)]="newInvestment.amount" name="amount">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" required [(ngModel)]="newInvestment.description" name="description">
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!investmentForm.form.valid">
+                Add Investment
+              </button>
+            </form>
           </div>
-          <div class="form-group">
-            <label for="amount">Amount</label>
-            <input type="number" class="form-control" id="amount" required [(ngModel)]="newInvestment.amount" name="amount">
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" required [(ngModel)]="newInvestment.description" name="description">
-          </div>
-          <button type="submit" class="btn btn-primary" [disabled]="!investmentForm.form.valid">
-            Add Investment
-          </button>
-        </form>
+        </div>
       </div>
   
       <!-- Table Section -->
       <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
-        <div class="spinner-border" role="status"></div>
+        <div class="spinner-grow text-primary" role="status"></div>
       </div>
       <div *ngIf="investments.length > 0" class="col-md-8">
-        <table class="table outer-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Description</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let investment of investments">
-              <td>{{ investment.date | date }}</td>
-              <td>{{ investment.amount }}</td>
-              <td>{{ investment.description }}</td>
-              <td>
-                <div class="btn-group" role="group">
-                  <button class="btn btn-primary mx-1" (click)="openUpdateModal(investment)">Edit</button>
-                  <button class="btn btn-danger mx-1" (click)="deleteInvestment(investment.id)">Delete</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <h6 *ngIf="investorId" >
+          <span class="custom-badge">
+            Investments of <strong class="investor-name">{{ investorName }}</strong>
+          </span>
+        </h6>
+        <div class="card rounded shadow">
+          <div class="card-body">
+            <table class="table custom-style">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let investment of investments">
+                  <td>{{ investment.date | date }}</td>
+                  <td>{{ investment.amount }}</td>
+                  <td>{{ investment.description }}</td>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-primary mx-1" (click)="openUpdateModal(investment)">Edit</button>
+                      <button class="btn btn-danger mx-1" (click)="deleteInvestment(investment.id)">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <!-- Update Investment Modal -->
