@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\inventorymanagement.client\inventorymanagement.client.esproj">
+    <ProjectReference Include="..\inventorymanagement.client\investmentsManagement.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
