@@ -1,6 +1,6 @@
-﻿namespace InventoryManagement.Server.Data.Models.ViewModels
+﻿namespace investmentsManagement.Server.Data.Models.ViewModels
 {
-    public class ExpencesDTO: BaseDTO
+    public class ExpencesDTO : BaseDTO
     {
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }

@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using InventoryManagement.Server.Data;
-using InventoryManagement.Server.Data.Models;
-using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Models;
+using investmentsManagement.Server.Data;
+using investmentsManagement.Server.Data.Models;
+using investmentsManagement.Server.Data.Models.ViewModels;
 
-namespace InventoryManagement.Server.Services
+namespace investmentsManagement.Server.Services
 {
     public class InvestmentService : IInvestmentService
     {
@@ -16,10 +15,10 @@ namespace InventoryManagement.Server.Services
             _context = context;
             _mapper = mapper;
         }
-       
+
         public List<InvestmentsDTO> GetAllInvestments()
         {
-            var Investmentss = _context.Investments.Where(W=> !W.IsDeleted).ToList();
+            var Investmentss = _context.Investments.Where(W => !W.IsDeleted).ToList();
             return _mapper.Map<List<InvestmentsDTO>>(Investmentss);
         }
         public InvestmentsDTO GetInvestmentsById(int id)

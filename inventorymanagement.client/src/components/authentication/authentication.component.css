@@ -1,0 +1,50 @@
+.login-container {
+    background: #fff;
+    padding: 60px;
+    max-width: 600px;
+    min-width: 200px;
+    margin: 0 30px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.login-box {
+  background-color: #003366; /* White background for the login box */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 350px; /* Width of the login/signup box */
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px; /* Space between input fields */
+}
+
+.login-btn {
+  background-color: #20c997;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.login-btn:hover {
+  background-color: #17a589;
+}
+
+/* Additional styles for extra options */
+.extra-options {
+  margin-top: 10px; /* Space above extra options */
+  color: white;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-box {
+      width: 100%;
+      padding: 1rem;
+    }
+  }

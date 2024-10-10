@@ -1,21 +1,20 @@
 ﻿using AutoMapper;
-using InventoryManagement.Server.Data.Models;
-using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Models;
+using investmentsManagement.Server.Data.Models;
+using investmentsManagement.Server.Data.Models.ViewModels;
 
-namespace InventoryManagement.Server.Data.MappingProfiles
+namespace investmentsManagement.Server.Data.MappingProfiles
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() 
+        public MappingProfile()
         {
             CreateMap<Product, ProductDTO>().ReverseMap();
-            
+
             CreateMap<Sale, SaleDTO>()
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ReverseMap()
                 .ForMember(dest => dest.Product, opt => opt.Ignore());
-           
+
             CreateMap<Investors, InvestorsDTO>()
                .ReverseMap()
                .ForMember(dest => dest.Investments, opt => opt.Ignore());
@@ -27,7 +26,7 @@ namespace InventoryManagement.Server.Data.MappingProfiles
             CreateMap<Ladger, LadgerDTO>()
                 .ReverseMap()
                 .ForMember(dest => dest.Investor, opt => opt.Ignore());
-            
+
             CreateMap<Ladger, LadgerDTO>()
                 .ReverseMap()
                 .ForMember(dest => dest.Investor, opt => opt.Ignore());
@@ -48,7 +47,7 @@ namespace InventoryManagement.Server.Data.MappingProfiles
                 .ForMember(dest => dest.ExpenceTypes, opt => opt.Ignore());
 
             CreateMap<Purchase, PurchaseDTO>()
-                .ForMember(dest=>dest.ProductName, opt=>opt.MapFrom(src=>src.Product.Name))
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ReverseMap()
                 .ForMember(dest => dest.Product, opt => opt.Ignore());
         }

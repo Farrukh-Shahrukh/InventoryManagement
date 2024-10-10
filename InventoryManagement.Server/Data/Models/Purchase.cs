@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace InventoryManagement.Server.Data.Models
+namespace investmentsManagement.Server.Data.Models
 {
     public class Purchase
     {

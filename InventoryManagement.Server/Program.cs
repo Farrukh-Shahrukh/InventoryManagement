@@ -1,7 +1,6 @@
-
-using InventoryManagement.Server.Data;
-using InventoryManagement.Server.Data.Models;
-using InventoryManagement.Server.Services;
+using investmentsManagement.Server.Data;
+using investmentsManagement.Server.Data.Models;
+using investmentsManagement.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
 using System.Text;
 
-namespace InventoryManagement.Server
+namespace investmentsManagement.Server
 {
     public class Program
     {
@@ -18,10 +17,10 @@ namespace InventoryManagement.Server
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-    //        builder.Configuration
-    //.SetBasePath(Directory.GetCurrentDirectory())
-    //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    //.AddEnvironmentVariables();
+            //        builder.Configuration
+            //.SetBasePath(Directory.GetCurrentDirectory())
+            //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //.AddEnvironmentVariables();
 
             builder.Services.AddControllers();
 
@@ -95,7 +94,7 @@ namespace InventoryManagement.Server
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

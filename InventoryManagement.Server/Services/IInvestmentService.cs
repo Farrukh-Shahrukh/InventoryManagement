@@ -1,7 +1,6 @@
-﻿using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Models;
+﻿using investmentsManagement.Server.Data.Models.ViewModels;
 
-namespace InventoryManagement.Server.Services
+namespace investmentsManagement.Server.Services
 {
     public interface IInvestmentService
     {

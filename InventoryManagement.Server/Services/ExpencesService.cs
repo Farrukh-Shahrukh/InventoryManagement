@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Data.Models;
-using InventoryManagement.Server.Data;
+using investmentsManagement.Server.Data;
+using investmentsManagement.Server.Data.Models.ViewModels;
+using investmentsManagement.Server.Data.Models;
 
-namespace InventoryManagement.Server.Services
+namespace investmentsManagement.Server.Services
 {
-    public class ExpencesService: IExpencesService
+    public class ExpencesService : IExpencesService
     {
 
         private readonly ApplicationDbContext _context;

@@ -1,8 +1,8 @@
-﻿using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Services;
+﻿using investmentsManagement.Server.Data.Models.ViewModels;
+using investmentsManagement.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InventoryManagement.Server.Controllers
+namespace investmentsManagement.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

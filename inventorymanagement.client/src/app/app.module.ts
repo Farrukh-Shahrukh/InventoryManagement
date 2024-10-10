@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -13,7 +13,9 @@ import { InvestorComponent } from '../components/investor/investor.component';
 import { InvestmentComponent } from '../components/investment/investment.component';
 import { ProjectComponent } from '../components/project/project.component';
 import { ExpenseComponent } from '../components/expense/expense.component';
-import { ExpenseTypeComponent } from '../components/expense-type/expense-type.component'; // Import FormsModule
+import { ExpenseTypeComponent } from '../components/expense-type/expense-type.component';
+import { AuthenticationComponent } from '../components/authentication/authentication.component'; // Import FormsModule
+import { AuthInterceptor } from './auth.interceptor';
 
 // const routes: Routes = [
 //   { path: 'investors', component: InvestorComponent },
@@ -31,7 +33,8 @@ import { ExpenseTypeComponent } from '../components/expense-type/expense-type.co
     InvestmentComponent,
     ProjectComponent,
     ExpenseComponent,
-    ExpenseTypeComponent
+    ExpenseTypeComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -40,7 +43,13 @@ import { ExpenseTypeComponent } from '../components/expense-type/expense-type.co
     FormsModule
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

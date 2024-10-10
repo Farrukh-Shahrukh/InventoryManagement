@@ -1,0 +1,65 @@
+<div class="login-container">
+  <div class="login-box">
+    <form (ngSubmit)="authenticate()" #authForm="ngForm">
+      <!-- Conditionally show first name and last name fields only in signup mode -->
+      <div *ngIf="!isLoginMode" class="form-group">
+        <input [(ngModel)]="user.firstName" name="firstName" type="text" placeholder="First Name" required />
+      </div>
+
+      <div *ngIf="!isLoginMode" class="form-group">
+        <input [(ngModel)]="user.lastName" name="lastName" type="text" placeholder="Last Name" required />
+      </div>
+
+      <!-- Common email field for both login and signup -->
+      <div class="form-group">
+        <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required />
+      </div>
+
+            <!-- Common password field for both login and signup -->
+      <div class="form-group">
+        <input
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+      </div>
+
+      <!-- Confirm password field, shown only in signup mode -->
+      <div *ngIf="!isLoginMode" class="form-group">
+        <input
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm Password"
+          required
+          (blur)="checkPasswordsMatch()"
+        />
+      </div>
+
+      <!-- Error message if passwords do not match -->
+      <h6 *ngIf="!passwordsMatch" class="text-danger text-start">
+        Passwords do not match
+      </h6>
+
+
+      <!-- Button to submit login or register -->
+      <button class="login-btn" type="submit" [disabled]="!authForm.form.valid || (!passwordsMatch && !isLoginMode)">
+        {{ isLoginMode ? 'Log in' : 'Sign up' }}
+      </button>
+    </form>
+    <!-- Display error or success message -->
+    <h6 *ngIf="message" class="text-danger text-start">
+      {{ message }}
+    </h6>
+
+    <!-- Extra options -->
+    <div class="extra-options">
+      <!-- Show toggle between login and signup -->
+      <a (click)="toggleMode()" style="color: white;" href="javascript:void(0);">
+        {{ isLoginMode ? 'Register here' : 'Already have an account? Log in' }}
+      </a>
+    </div>
+  </div>
+</div>

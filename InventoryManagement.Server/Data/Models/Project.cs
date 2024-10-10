@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace InventoryManagement.Server.Data.Models
+namespace investmentsManagement.Server.Data.Models
 {
-    public class Projects: BaseEntity
+    public class Projects : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }

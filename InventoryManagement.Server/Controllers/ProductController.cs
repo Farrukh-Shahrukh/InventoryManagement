@@ -1,11 +1,8 @@
-﻿using InventoryManagement.Server.Data;
-using InventoryManagement.Server.Data.Models;
-using InventoryManagement.Server.Models;
-using InventoryManagement.Server.Services;
-using Microsoft.AspNetCore.Http;
+﻿using investmentsManagement.Server.Data.Models.ViewModels;
+using investmentsManagement.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InventoryManagement.Server.Controllers
+namespace investmentsManagement.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,7 +16,7 @@ namespace InventoryManagement.Server.Controllers
         [HttpGet(Name = "GetAllProducts")]
         public IActionResult Get()
         {
-          return Ok(_productService.GetAllProducts());
+            return Ok(_productService.GetAllProducts());
         }
         [HttpPost]
         public IActionResult Create([FromBody] ProductDTO productDto)

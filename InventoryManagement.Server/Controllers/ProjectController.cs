@@ -1,10 +1,10 @@
-﻿using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Services;
+﻿using investmentsManagement.Server.Data.Models.ViewModels;
+using investmentsManagement.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace InventoryManagement.Server.Controllers
+namespace investmentsManagement.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

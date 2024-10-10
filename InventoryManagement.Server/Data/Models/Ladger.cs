@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
 
-namespace InventoryManagement.Server.Data.Models
+namespace investmentsManagement.Server.Data.Models
 {
-    public class Ladger: BaseEntity
+    public class Ladger : BaseEntity
     {
-        public Int64 Amount { get; set; }
+        public long Amount { get; set; }
         public DateTime Date { get; set; }
         public string Descriptions { get; set; }
         /// <summary>

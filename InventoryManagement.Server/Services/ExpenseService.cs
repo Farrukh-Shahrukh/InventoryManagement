@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Data.Models;
-using InventoryManagement.Server.Data;
+using investmentsManagement.Server.Data;
+using investmentsManagement.Server.Data.Models;
+using investmentsManagement.Server.Data.Models.ViewModels;
 
-namespace InventoryManagement.Server.Services
+namespace investmentsManagement.Server.Services
 {
     public class ExpenseService : IExpenseService
     {
@@ -34,7 +34,7 @@ namespace InventoryManagement.Server.Services
             var expense = _mapper.Map<Expences>(expenseDto);
             expense.CreatedDate = DateTime.Now;
             expense.publicId = Guid.NewGuid();
-            
+
             _context.Expences.Add(expense);
             _context.SaveChanges();
             return _mapper.Map<ExpencesDTO>(expense);

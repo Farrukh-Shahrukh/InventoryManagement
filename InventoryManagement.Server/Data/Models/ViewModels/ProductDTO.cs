@@ -1,4 +1,4 @@
-﻿namespace InventoryManagement.Server.Models
+﻿namespace investmentsManagement.Server.Data.Models.ViewModels
 {
     public class ProductDTO
     {

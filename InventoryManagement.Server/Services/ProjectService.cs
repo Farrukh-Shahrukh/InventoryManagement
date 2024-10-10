@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Data;
-using InventoryManagement.Server.Data.Models;
+using investmentsManagement.Server.Data;
+using investmentsManagement.Server.Data.Models;
+using investmentsManagement.Server.Data.Models.ViewModels;
 
-namespace InventoryManagement.Server.Services
+namespace investmentsManagement.Server.Services
 {
     public class ProjectService : IProjectService
     {

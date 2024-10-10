@@ -1,6 +1,6 @@
-﻿using InventoryManagement.Server.Data.Models.ViewModels;
+﻿using investmentsManagement.Server.Data.Models.ViewModels;
 
-namespace InventoryManagement.Server.Services
+namespace investmentsManagement.Server.Services
 {
     public interface ILadgerService
     {

@@ -1,30 +1,38 @@
-﻿<div class="background">
-<div class="d-flex">
-  <!-- Sidebar -->
-  <div class="sidebar flex-column p-3" id="sidebarMenu">
-    <h5 class="text-center">Menu</h5>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/investors']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Investors</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/projects']" routerLinkActive="active">Projects</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/investments']" routerLinkActive="active">Investments</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/expenses']" routerLinkActive="active">Expenses</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/expenseTypes']" routerLinkActive="active">Expense Types</a>
-      </li>
-    </ul>
-  </div>
+﻿<div [ngClass]="{'background': !isLoginPage(), 'login-background': isLoginPage()}">
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div *ngIf="!isLoginPage()" class="sidebar flex-column p-3" id="sidebarMenu">
+      <h5 class="text-center">Menu</h5>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/investors']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Investors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/projects']" routerLinkActive="active">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/investments']" routerLinkActive="active">Investments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/expenses']" routerLinkActive="active">Expenses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/expenseTypes']" routerLinkActive="active">Expense Types</a>
+        </li>
+      </ul>
+       <!-- User Info and Logout Button -->
+       <div class="mt-auto text-center sidebar-footer">
+        <!-- Display User First Name -->
+        <p class="mb-1"><strong>{{ userFirstName }}</strong></p>
 
-  <!-- Main content -->
-  <div class="content-area flex-grow-1 p-4">
-    <router-outlet></router-outlet>
+        <!-- Logout Button -->
+        <button class="btn btn-danger btn-sm" (click)="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div [ngClass]="{'content-area': true, 'login-content-area': isLoginPage()}" class="p-4">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-</div>
 </div>

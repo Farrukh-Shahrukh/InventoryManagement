@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace InventoryManagement.Server.Data.Models.ViewModels
+namespace investmentsManagement.Server.Data.Models.ViewModels
 {
     public class LoginModel
     {

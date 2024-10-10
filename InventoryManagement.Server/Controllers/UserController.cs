@@ -1,5 +1,5 @@
-﻿using InventoryManagement.Server.Data.Models;
-using InventoryManagement.Server.Data.Models.ViewModels;
+﻿using investmentsManagement.Server.Data.Models;
+using investmentsManagement.Server.Data.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace InventoryManagement.Server.Controllers
+namespace investmentsManagement.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -56,12 +56,20 @@ namespace InventoryManagement.Server.Controllers
 
             if (result.Succeeded)
             {
-                // Generate JWT token (example)
-                var token = GenerateJwtToken(model.Email);
-                return Ok(new { token });
+                var user = await _userManager.FindByEmailAsync(model.Email); // Get the user object
+                var token = GenerateJwtToken(model.Email); // Generate JWT token
+
+                // Return both token and firstName
+                return Ok(new { token, userName = user.FirstName+' '+user.LastName  });
             }
 
             return Unauthorized();
+        }
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok(new { message = "Logged out successfully." });
         }
 
         // Get all users
@@ -87,15 +95,19 @@ namespace InventoryManagement.Server.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
 
+            // Set the issuer and audience from configuration
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }),
                 Expires = DateTime.UtcNow.AddDays(7),
+                Issuer = _configuration["Jwt:Issuer"],      // Set Issuer
+                Audience = _configuration["Jwt:Audience"],  // Set Audience
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
     }
 }

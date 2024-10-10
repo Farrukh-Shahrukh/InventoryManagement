@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 
-namespace InventoryManagement.Server.Data.Models
+namespace investmentsManagement.Server.Data.Models
 {
-    public class Investors: BaseEntity
+    public class Investors : BaseEntity
     {
-       
-        public string  CNIC { get; set; }
+
+        public string CNIC { get; set; }
         public string Name { get; set; }
         public ICollection<Investments> Investments { get; set; }
     }

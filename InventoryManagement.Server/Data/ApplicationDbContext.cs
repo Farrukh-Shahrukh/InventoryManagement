@@ -1,9 +1,10 @@
-﻿using InventoryManagement.Server.Data.Models;
+﻿using investmentsManagement.Server.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace InventoryManagement.Server.Data
+namespace investmentsManagement.Server.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

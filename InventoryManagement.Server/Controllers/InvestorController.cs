@@ -1,11 +1,11 @@
-﻿using InventoryManagement.Server.Data.Models.ViewModels;
-using InventoryManagement.Server.Models;
-using InventoryManagement.Server.Services;
-using Microsoft.AspNetCore.Http;
+﻿using investmentsManagement.Server.Data.Models.ViewModels;
+using investmentsManagement.Server.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InventoryManagement.Server.Controllers
+namespace investmentsManagement.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class InvestorController : ControllerBase

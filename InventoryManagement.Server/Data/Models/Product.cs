@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace InventoryManagement.Server.Data.Models
+namespace investmentsManagement.Server.Data.Models
 {
     public class Product
     {
