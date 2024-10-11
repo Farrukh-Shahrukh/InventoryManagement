@@ -157,4 +157,7 @@ export class ExpenseComponent implements OnInit {
     this.modalService.open(this.updateModal);
     this.isEditing = true;
   }
+  getTotalExpenseAmount(): number {
+    return this.expenses.reduce((total, expense) => total + expense.amount, 0);
+  }  
 }

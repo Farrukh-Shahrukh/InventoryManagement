@@ -53,13 +53,18 @@
       <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
         <div class="spinner-grow text-primary" role="status"></div>
       </div>
-      <div *ngIf="investments.length > 0" class="col-md-8">
-        <h6 *ngIf="investorId" >
+      <div class="col-md-8">
+        <h6 *ngIf="investorId && investments.length > 0" >
           <span class="custom-badge">
             Investments of <strong class="investor-name">{{ investorName }}</strong>
           </span>
         </h6>
-        <div class="card rounded shadow">
+        <h6 *ngIf="investments.length == 0" >
+          <span class="custom-badge">
+            No Investments Found!
+          </span>
+        </h6>
+        <div *ngIf="investments.length > 0" class="card rounded shadow">
           <div class="card-body">
             <table class="table custom-style">
               <thead>
@@ -73,14 +78,21 @@
               <tbody>
                 <tr *ngFor="let investment of investments">
                   <td>{{ investment.date | date }}</td>
-                  <td>{{ investment.amount }}</td>
+                  <td>{{ investment.amount | currency:'RS '}}</td>
                   <td>{{ investment.description }}</td>
                   <td>
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-primary mx-1" (click)="openUpdateModal(investment)">Edit</button>
-                      <button class="btn btn-danger mx-1" (click)="deleteInvestment(investment.id)">Delete</button>
+                    <div class="btn-group" role="group" aria-label="Investment Actions">
+                      <button class="btn btn-primary btn-sm rounded mx-1" (click)="openUpdateModal(investment)">Edit</button>
+                      <button class="btn btn-danger btn-sm rounded mx-1" (click)="deleteInvestment(investment.id)">Delete</button>
                     </div>
                   </td>
+                </tr>
+                <!-- Total Row -->
+                <tr>
+                  <td><strong>Total</strong></td>
+                  <td><strong>{{ getTotalInvestmentAmount() | currency:'RS ' }}</strong></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -131,7 +143,7 @@
       </div>
 
       <!-- Modal Buttons -->
-      <div class="d-flex justify-content-between">
+      <div class="d-flex-b justify-content-between">
         <button type="submit" class="btn btn-primary" [disabled]="!updateInvestmentForm.form.valid">Update Investment</button>
         <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
       </div>

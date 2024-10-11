@@ -3,30 +3,41 @@
     <!-- Sidebar -->
     <div *ngIf="!isLoginPage()" class="sidebar flex-column p-3" id="sidebarMenu">
       <h5 class="text-center">Menu</h5>
-      <ul class="nav nav-pills flex-column mb-auto">
+      <ul class="nav nav-pills flex-column mb-auto text-start"> <!-- Added text-start for left alignment -->
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/investors']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Investors</a>
+          <a class="nav-link text-start" [routerLink]="['/investors']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="bi bi-person-lines-fill me-2"></i>Investors
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/projects']" routerLinkActive="active">Projects</a>
+          <a class="nav-link text-start" [routerLink]="['/projects']" routerLinkActive="active">
+            <i class="bi bi-kanban-fill me-2"></i>Projects
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/investments']" routerLinkActive="active">Investments</a>
+          <a class="nav-link text-start" [routerLink]="['/investments']" routerLinkActive="active">
+            <i class="bi bi-currency-dollar me-2"></i>Investments
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/expenses']" routerLinkActive="active">Expenses</a>
+          <a class="nav-link text-start" [routerLink]="['/expenses']" routerLinkActive="active">
+            <i class="bi bi-receipt me-2"></i>Expenses
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/expenseTypes']" routerLinkActive="active">Expense Types</a>
+          <a class="nav-link text-start" [routerLink]="['/expenseTypes']" routerLinkActive="active">
+            <i class="bi bi-list-task me-2"></i>Expense Types
+          </a>
         </li>
       </ul>
        <!-- User Info and Logout Button -->
        <div class="mt-auto text-center sidebar-footer">
-        <!-- Display User First Name -->
-        <p class="mb-1"><strong>{{ userFirstName }}</strong></p>
+        <p><i class="bi bi-person-fill me-1"></i><strong>{{ userFirstName }}</strong></p>
 
         <!-- Logout Button -->
-        <button class="btn btn-danger btn-sm" (click)="logout()">Logout</button>
+        <button class="btn btn-danger btn-sm" (click)="logout()">
+          <i class="bi bi-box-arrow-right me-1"></i>Logout
+        </button>
       </div>
     </div>
 

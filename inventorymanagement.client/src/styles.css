@@ -6,11 +6,14 @@ html, body {
 
 .background {
   height: 100%;
-  background: linear-gradient(to bottom, #003366 30%, #f4f6f9 30%); /* Dark Blue (#003366) for the top 30% and Light Gray (#f4f6f9) for the remaining */
+  background: linear-gradient(to bottom, #003366 50%, #f4f6f9 30%); /* Dark Blue (#003366) for the top 30% and Light Gray (#f4f6f9) for the remaining */
 }
 
 .d-flex {
   min-height: 100vh;
+  display: flex; /* Ensure flex layout for sidebar and content */
+}
+.d-flex-b {
   display: flex; /* Ensure flex layout for sidebar and content */
 }
 .login-background {
@@ -52,9 +55,7 @@ html, body {
 }
 .btn-danger {
   width: 100%; /* Full-width button for better usability */
-  margin-top: 5px; /* Space between text and button */
 }
-
 /* Style for the user name */
 .sidebar-footer p {
   margin: 0; /* Remove default margin */

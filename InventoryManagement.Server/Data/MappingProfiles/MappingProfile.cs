@@ -8,12 +8,10 @@ namespace investmentsManagement.Server.Data.MappingProfiles
     {
         public MappingProfile()
         {
-            CreateMap<Product, ProductDTO>().ReverseMap();
-
-            CreateMap<Sale, SaleDTO>()
+            /*CreateMap<Sale, SaleDTO>()
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
                 .ReverseMap()
-                .ForMember(dest => dest.Product, opt => opt.Ignore());
+                .ForMember(dest => dest.Product, opt => opt.Ignore());*/
 
             CreateMap<Investors, InvestorsDTO>()
                .ReverseMap()
@@ -45,11 +43,6 @@ namespace investmentsManagement.Server.Data.MappingProfiles
                .ReverseMap()
                .ForMember(dest => dest.Project, opt => opt.Ignore())
                 .ForMember(dest => dest.ExpenceTypes, opt => opt.Ignore());
-
-            CreateMap<Purchase, PurchaseDTO>()
-                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
-                .ReverseMap()
-                .ForMember(dest => dest.Product, opt => opt.Ignore());
         }
     }
 }

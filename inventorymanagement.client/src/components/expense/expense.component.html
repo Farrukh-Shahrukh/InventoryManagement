@@ -1,143 +1,140 @@
 <div class="container">
-    <div class="row">
-      <!-- Form Section -->
-      <div class="col-md-4">
-        <div class="toast-container">
-          <ngb-toast *ngIf="showToastFlag" [ngClass]="{'toast-success': toastType === 'success', 'toast-error': toastType === 'error'}" 
-            [autohide]="true" [delay]="3000" (hidden)="showToastFlag = false">
-            {{ toastMessage }}
-          </ngb-toast>
+  <div class="row">
+    <!-- Form Section -->
+    <div class="col-md-4">
+      <div class="toast-container">
+        <ngb-toast *ngIf="showToastFlag" [ngClass]="{'toast-success': toastType === 'success', 'toast-error': toastType === 'error'}" 
+          [autohide]="true" [delay]="3000" (hidden)="showToastFlag = false">
+          {{ toastMessage }}
+        </ngb-toast>
+      </div>
+      <div class="card rounded shadow">
+        <div class="card-body">
+          <form (ngSubmit)="saveExpense()" #expenseForm="ngForm">
+            <!-- Project Section -->
+            <div class="form-group">
+              <label for="project">Project</label>
+              <input *ngIf="projectId" type="text" class="form-control readonly-field" id="project" [value]="projectName" readonly>
+              <select *ngIf="!projectId" class="form-control" [(ngModel)]="newExpense.projectId" name="project" required>
+                <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="expenseType">Expense Type</label>
+              <select class="form-control" [(ngModel)]="newExpense.expenceTypeId" name="expenseType" required>
+                <option *ngFor="let type of expenseTypes" [value]="type.id">{{ type.name }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="date" required [(ngModel)]="newExpense.date" name="date">
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="number" class="form-control" id="amount" required [(ngModel)]="newExpense.amount" name="amount">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" class="form-control" id="description" required [(ngModel)]="newExpense.description" name="description">
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!expenseForm.form.valid">Add Expense</button>
+          </form>
         </div>
-        <div class="card rounded shadow">
-          <div class="card-body">
-            <form (ngSubmit)="saveExpense()" #expenseForm="ngForm">
-                <!-- Project Section -->
-              <div class="form-group">
-                <label for="project">Project</label>
-                
-                <!-- If projectId is available, show read-only field -->
-                <input *ngIf="projectId" type="text" class="form-control readonly-field" id="project" [value]="projectName" readonly>
-                
-                <!-- If no projectId, show a dropdown -->
-                <select *ngIf="!projectId" class="form-control" [(ngModel)]="newExpense.projectId" name="project" required>
-                  <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="expenseType">Expense Type</label>
-                <select class="form-control" [(ngModel)]="newExpense.expenceTypeId" name="expenseType" required>
-                  <option *ngFor="let type of expenseTypes" [value]="type.id">{{ type.name }}</option>
-                </select>
-              </div>
-              
-              <div class="form-group">
-                <label for="date">Date</label>
-                <input type="date" class="form-control" id="date" required [(ngModel)]="newExpense.date" name="date">
-              </div>
-              <div class="form-group">
-                <label for="amount">Amount</label>
-                <input type="number" class="form-control" id="amount" required [(ngModel)]="newExpense.amount" name="amount">
-              </div>
-              <div class="form-group">
-                <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" required [(ngModel)]="newExpense.description" name="description">
-              </div>
+      </div>
+    </div>
 
-              <button type="submit" class="btn btn-primary" [disabled]="!expenseForm.form.valid">Add Expense</button>
-            </form>
+    <!-- Table Section -->
+    <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
+      <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+
+    <div class="col-md-8">
+      <h6 *ngIf="expenses.length == 0">
+        <span class="custom-badge">No Expense Found!</span>
+      </h6>
+      <h6 *ngIf="projectId && expenses.length > 0">
+        <span class="custom-badge">Expenses of <strong class="investor-name">{{ projectName }}</strong></span>
+      </h6>
+      <div *ngIf="expenses.length > 0" class="card rounded shadow">
+        <div class="card-body">
+          <table class="table custom-style">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let expense of expenses">
+                <td>{{ expense.date | date }}</td>
+                <td>{{ expense.amount | currency:'RS ' }}</td>
+                <td>{{ expense.description }}</td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-primary btn-sm rounded mx-1" (click)="openUpdateModal(expense)">Edit</button>
+                    <button class="btn btn-danger btn-sm rounded mx-1" (click)="deleteExpense(expense.id)">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>{{ getTotalExpenseAmount() | currency:'RS ' }}</strong></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Update Expense Modal -->
+    <ng-template #updateModal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Update Expense</h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="updateExpense(modal)" #updateForm="ngForm">
+          <!-- Date Field -->
+          <div class="form-group">
+            <label for="date">Expense Date</label>
+            <input type="date" class="form-control" id="date" required [(ngModel)]="selectedExpense.date" name="date">
           </div>
-        </div>
-      </div>
-  
-      <!-- Table Section -->
-      <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
-        <div class="spinner-grow text-primary" role="status"></div>
-      </div>
-  
-      <div *ngIf="expenses.length > 0" class="col-md-8">
-        <h6 *ngIf="projectId" >
-          <span class="custom-badge">
-            Expenses of <strong class="investor-name">{{ projectName }}</strong>
-          </span>
-        </h6>
-        <div class="card rounded shadow">
-          <div class="card-body">
-            <table class="table custom-style">
-              <thead>
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Amount</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let expense of expenses">
-                  <td>{{ expense.date | date }}</td>
-                  <td>{{ expense.amount }}</td>
-                  <td>{{ expense.description }}</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <button class="btn btn-primary mx-1" (click)="openUpdateModal(expense)">Edit</button>
-                      <button class="btn btn-danger mx-1" (click)="deleteExpense(expense.id)">Delete</button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- Amount Field -->
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" required [(ngModel)]="selectedExpense.amount" name="amount">
           </div>
-        </div>
+          <!-- Description Field -->
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" required [(ngModel)]="selectedExpense.description" name="description">
+          </div>
+          <!-- Expense Type Dropdown -->
+          <div class="form-group">
+            <label for="expenseType">Expense Type</label>
+            <select class="form-control" required [(ngModel)]="selectedExpense.expenceTypeId" name="expenseType">
+              <option *ngFor="let type of expenseTypes" [value]="type.id">{{ type.name }}</option>
+            </select>
+          </div>
+          <!-- Project Dropdown (optional if projectId is not provided via queryParams) -->
+          <div *ngIf="!projectId" class="form-group">
+            <label for="project">Project</label>
+            <select class="form-control" required [(ngModel)]="selectedExpense.projectId" name="project">
+              <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+            </select>
+          </div>
+          <!-- Modal Buttons -->
+          <div class="d-flex-b justify-content-between">
+            <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Update Expense</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
+          </div>
+        </form>
       </div>
-  <!-- Update Expense Modal -->
-<ng-template #updateModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">Update Expense</h4>
-    </div>
-    <div class="modal-body">
-      <form (ngSubmit)="updateExpense(modal)" #updateForm="ngForm">
-        <!-- Date Field -->
-        <div class="form-group">
-          <label for="date">Expense Date</label>
-          <input type="date" class="form-control" id="date" required [(ngModel)]="selectedExpense.date" name="date">
-        </div>
-  
-        <!-- Amount Field -->
-        <div class="form-group">
-          <label for="amount">Amount</label>
-          <input type="number" class="form-control" id="amount" required [(ngModel)]="selectedExpense.amount" name="amount">
-        </div>
-  
-        <!-- Description Field -->
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input type="text" class="form-control" id="description" required [(ngModel)]="selectedExpense.description" name="description">
-        </div>
-  
-        <!-- Expense Type Dropdown -->
-        <div class="form-group">
-          <label for="expenseType">Expense Type</label>
-          <select class="form-control" required [(ngModel)]="selectedExpense.expenceTypeId" name="expenseType">
-            <option *ngFor="let type of expenseTypes" [value]="type.id">{{ type.name }}</option>
-          </select>
-        </div>
-  
-        <!-- Project Dropdown (optional if projectId is not provided via queryParams) -->
-        <div *ngIf="!projectId" class="form-group">
-          <label for="project">Project</label>
-          <select class="form-control" required [(ngModel)]="selectedExpense.projectId" name="project">
-            <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
-          </select>
-        </div>
-  
-        <!-- Modal Buttons -->
-        <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Update Expense</button>
-          <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
-        </div>
-      </form>
-    </div>
-</ng-template>
-  
-    </div>
+    </ng-template>
   </div>
-  
+</div>

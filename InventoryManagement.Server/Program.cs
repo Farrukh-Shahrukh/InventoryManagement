@@ -55,11 +55,6 @@ namespace investmentsManagement.Server
                     };
                 });
 
-
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.AddScoped<ISaleService, SaleService>();
-            builder.Services.AddScoped<IPurchaseService, PurchaseService>();
-
             builder.Services.AddScoped<IProjectService, ProjectService>();
             builder.Services.AddScoped<IInvestorService, InvestorService>();
             builder.Services.AddScoped<IInvestmentService, InvestmentService>();

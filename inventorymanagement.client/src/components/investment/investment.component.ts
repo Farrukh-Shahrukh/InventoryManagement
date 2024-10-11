@@ -146,4 +146,7 @@ export class InvestmentComponent implements OnInit {
     this.modalService.open(this.updateModal);
     this.isEditing = true;
   }
+  getTotalInvestmentAmount(): number {
+    return this.investments.reduce((total, investment) => total + investment.amount, 0);
+  }
 }

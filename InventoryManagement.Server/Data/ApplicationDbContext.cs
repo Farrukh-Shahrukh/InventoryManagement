@@ -11,9 +11,6 @@ namespace investmentsManagement.Server.Data
         {
         }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Sale> Sales { get; set; }
-        public DbSet<Purchase> Purchases { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Expences> Expences { get; set; }
         public DbSet<Investments> Investments { get; set; }

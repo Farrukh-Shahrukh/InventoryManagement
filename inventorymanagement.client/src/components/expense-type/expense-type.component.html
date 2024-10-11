@@ -1,6 +1,4 @@
 <div class="container">
-    <h3>Expense Types</h3>
-  
     <div class="row">
       <!-- Form Section -->
       <div class="col-md-4">
@@ -28,8 +26,13 @@
       <div *ngIf="isLoading" class="d-flex justify-content-center my-3">
         <div class="spinner-grow text-primary" role="status"></div>
       </div>
-      <div *ngIf="expenseTypes.length > 0" class="col-md-8">
-        <div class="card rounded shadow">
+      <div class="col-md-8">
+        <h6 *ngIf="expenseTypes.length == 0" >
+          <span class="custom-badge">
+            No Expense Type Found!
+          </span>
+        </h6>
+        <div *ngIf="expenseTypes.length > 0" class="card rounded shadow">
           <div class="card-body">
             <table class="table custom-style">
               <thead>
@@ -43,8 +46,8 @@
                   <td>{{ expenseType.name }}</td>
                   <td>
                     <div class="btn-group" role="group">
-                      <button class="btn btn-primary mx-1" (click)="openUpdateModal(expenseType)">Edit</button>
-                      <button class="btn btn-danger mx-1" (click)="deleteExpenseType(expenseType.id)">Delete</button>
+                      <button class="btn btn-primary btn-sm rounded mx-1" (click)="openUpdateModal(expenseType)">Edit</button>
+                      <button class="btn btn-danger btn-sm rounded mx-1" (click)="deleteExpenseType(expenseType.id)">Delete</button>
                     </div>
                   </td>
                 </tr>
@@ -68,7 +71,7 @@
                 </div>
                 <div class="form-group">
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex-b justify-content-between">
                   <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Update Expense Type</button>
                   <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
                 </div>

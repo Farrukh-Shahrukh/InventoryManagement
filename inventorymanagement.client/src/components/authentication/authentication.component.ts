@@ -81,8 +81,7 @@ export class AuthenticationComponent {
   login() {
     this.authService.login(this.credentials).subscribe(
       (response: any) => {
-        localStorage.setItem('jwtToken', response.token); // Store JWT token
-        localStorage.setItem('userName', response.userName); // Store user's first name
+        this.authService.storeUserData(response.token, response.userName);
         this.router.navigate(['/investors']); // Navigate to dashboard after login
       },
       (error) => {
@@ -100,9 +99,15 @@ export class AuthenticationComponent {
         this.toggleMode(); // After signup, switch to login mode
       },
       (error) => {
-        this.message = 'Error registering user';
+        if (error.error && error.error.errors && error.error.errors.Password) {
+          this.message = error.error.errors.Password.join(', ')
+        } else {
+          this.message = 'Error registering user. Please try again.';
+        }
         console.error(error);
       }
     );
   }
+  
+
 }

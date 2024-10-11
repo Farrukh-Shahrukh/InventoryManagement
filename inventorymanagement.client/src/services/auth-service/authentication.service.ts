@@ -18,16 +18,24 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
   getUserFirstName(): string {
-    return localStorage.getItem('userName') || ''; 
+    const firstName = localStorage.getItem('userName'); // Retrieve from local storage
+    return firstName ? firstName : ''; // Return empty string if not found
   }
-  
+  storeUserData(token: string, firstName: string): void {
+    localStorage.setItem('jwtToken', token); // Store the JWT token
+    localStorage.setItem('userName', firstName); // Store the user's first name
+  }
+
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}).pipe(
       tap(() => {
         // Remove tokens and user info from local storage on successful logout
         localStorage.removeItem('jwtToken');
-        localStorage.removeItem('userName'); 
       })
     );
+  }
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('jwtToken'); 
+    return !!token;
   }
 }

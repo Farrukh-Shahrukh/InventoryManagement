@@ -1,10 +1,11 @@
 ﻿using investmentsManagement.Server.Data.Models.ViewModels;
 using investmentsManagement.Server.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace investmentsManagement.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class InvestmentsController : ControllerBase

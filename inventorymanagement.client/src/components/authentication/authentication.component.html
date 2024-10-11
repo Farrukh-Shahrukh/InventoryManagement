@@ -43,9 +43,7 @@
         Passwords do not match
       </h6>
 
-
-      <!-- Button to submit login or register -->
-      <button class="login-btn" type="submit" [disabled]="!authForm.form.valid || (!passwordsMatch && !isLoginMode)">
+      <button class="btn login-btn" type="submit" [disabled]="!authForm.form.valid || (!passwordsMatch && !isLoginMode)">
         {{ isLoginMode ? 'Log in' : 'Sign up' }}
       </button>
     </form>
