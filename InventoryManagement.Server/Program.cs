@@ -60,6 +60,12 @@ namespace investmentsManagement.Server
             builder.Services.AddScoped<IInvestmentService, InvestmentService>();
             builder.Services.AddScoped<IExpenceTypeService, ExpenceTypeService>();
             builder.Services.AddScoped<IExpenseService, ExpenseService>();
+            builder.Services.AddScoped<IPurchaserService, PurchaserService>();
+            builder.Services.AddScoped<IPurchaserDocumentsService, PurchaserDocumentsService>();
+            builder.Services.AddScoped<ISallerService, SallerService>();
+            builder.Services.AddScoped<ISallerDocumentsService, SallerDocumentsService>();
+            builder.Services.AddScoped<ISalePurchaseService, SalePurchaseService>();
+            builder.Services.AddScoped<ISalePurchaseAttachmentService, SalePurchaseAttachmentService>();
 
             builder.Services.AddCors(options =>
             {

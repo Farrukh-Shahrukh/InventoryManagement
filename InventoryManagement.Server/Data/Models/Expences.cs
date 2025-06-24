@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Numerics;
+using Microsoft.AspNetCore.Mvc;
 
 namespace investmentsManagement.Server.Data.Models
 {
@@ -17,5 +18,7 @@ namespace investmentsManagement.Server.Data.Models
 
         public virtual Projects Project { get; set; }
         public virtual ExpenceTypes ExpenceTypes { get; set; }
+        public int? AttachmentId { get; set; }
+
     }
 }

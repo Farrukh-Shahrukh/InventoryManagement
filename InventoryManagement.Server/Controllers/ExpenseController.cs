@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace investmentsManagement.Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ExpenseController : ControllerBase

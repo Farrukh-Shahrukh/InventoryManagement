@@ -43,6 +43,37 @@ namespace investmentsManagement.Server.Data.MappingProfiles
                .ReverseMap()
                .ForMember(dest => dest.Project, opt => opt.Ignore())
                 .ForMember(dest => dest.ExpenceTypes, opt => opt.Ignore());
+
+            CreateMap<SalePurchase, SalePurchaseDTO>()
+              .ReverseMap()
+              .ForMember(dest => dest.attachments, opt => opt.Ignore())
+               .ForMember(dest => dest.Saller, opt => opt.Ignore())
+               .ForMember(dest => dest.Purchaser, opt => opt.Ignore());
+
+            CreateMap<Saller, SallerDTO>()
+             .ReverseMap()
+             .ForMember(dest => dest.Documents, opt => opt.Ignore())
+              .ForMember(dest => dest.Properties, opt => opt.Ignore());
+
+            CreateMap<Purchaser, PurchaserDTO>()
+             .ReverseMap()
+             .ForMember(dest => dest.Documents, opt => opt.Ignore())
+              .ForMember(dest => dest.Property, opt => opt.Ignore());
+
+            CreateMap<Attachmments, AttachmmentsDTO>()
+             .ReverseMap();
+
+            CreateMap<SalePurchaseAttachment, SalePurchaseAttachmentDTO>()
+             .ReverseMap();
+
+
+            CreateMap<PurchaserDocuments, PurchaserDocumentsDTO>()
+             .ReverseMap();
+
+
+            CreateMap<SallerDocuments, SallerDocumentsDTO>()
+             .ReverseMap();
+
         }
     }
 }

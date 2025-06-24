@@ -1,4 +1,7 @@
-﻿namespace investmentsManagement.Server.Data.Models.ViewModels
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace investmentsManagement.Server.Data.Models.ViewModels
 {
     public class ExpencesDTO : BaseDTO
     {
@@ -7,5 +10,10 @@
         public string Description { get; set; }
         public int ProjectId { get; set; }
         public int ExpenceTypeId { get; set; }
+        //public List<AttachmmentsDTO> Attachmments { get; set; }
+
+        [FromForm]
+        [NotMapped]
+        public IFormFileCollection Files { get; set; }
     }
 }

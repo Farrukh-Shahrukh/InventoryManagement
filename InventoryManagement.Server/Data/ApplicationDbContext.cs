@@ -19,6 +19,13 @@ namespace investmentsManagement.Server.Data
         public DbSet<Ladger> Ladger { get; set; }
 
         public DbSet<Projects> Projects { get; set; }
+        public DbSet<SalePurchase> SalePurchase { get; set; }
+        public DbSet<SalePurchaseAttachment> SalePurchaseAttachment { get; set; }
+        public DbSet<Saller> Saller { get; set; }
+        public DbSet<Purchaser> Purchaser { get; set; }
+        public DbSet<PurchaserDocuments> PurchaserDocuments { get; set; }
+
+        public DbSet<SallerDocuments> SallerDocuments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

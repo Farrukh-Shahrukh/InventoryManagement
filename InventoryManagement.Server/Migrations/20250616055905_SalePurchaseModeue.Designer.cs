@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using investmentsManagement.Server.Data;
 
@@ -11,9 +12,11 @@ using investmentsManagement.Server.Data;
 namespace InventoryManagement.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250616055905_SalePurchaseModeue")]
+    partial class SalePurchaseModeue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,46 +156,6 @@ namespace InventoryManagement.Server.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.Attachmments", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte[]>("Bytes")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileExtension")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("Size")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("publicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Attachmments");
                 });
 
             modelBuilder.Entity("investmentsManagement.Server.Data.Models.ExpenceTypes", b =>
@@ -432,261 +395,6 @@ namespace InventoryManagement.Server.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.Purchaser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CNIC")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("publicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Purchaser");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.PurchaserDocuments", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AttachmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AttachmmentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("PurchaserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SallerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("publicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttachmmentId");
-
-                    b.HasIndex("PurchaserId");
-
-                    b.HasIndex("SallerId");
-
-                    b.ToTable("PurchaserDocuments");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.SalePurchase", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PropertyNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PropertyType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PurchaserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SallerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Size")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("publicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PurchaserId")
-                        .IsUnique();
-
-                    b.HasIndex("SallerId");
-
-                    b.ToTable("SalePurchase");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.SalePurchaseAttachment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AttachmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AttachmmentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SalePurchaseId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("publicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttachmmentId");
-
-                    b.HasIndex("SalePurchaseId");
-
-                    b.ToTable("SalePurchaseAttachment");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.Saller", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CNIC")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("publicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Saller");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.SallerDocuments", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AttachmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AttachmmentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SallerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("publicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttachmmentId");
-
-                    b.HasIndex("SallerId");
-
-                    b.ToTable("SallerDocuments");
-                });
-
             modelBuilder.Entity("investmentsManagement.Server.Data.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -860,86 +568,6 @@ namespace InventoryManagement.Server.Migrations
                     b.Navigation("Investor");
                 });
 
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.PurchaserDocuments", b =>
-                {
-                    b.HasOne("investmentsManagement.Server.Data.Models.Attachmments", "Attachmment")
-                        .WithMany()
-                        .HasForeignKey("AttachmmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("investmentsManagement.Server.Data.Models.Purchaser", "Purchaser")
-                        .WithMany("Documents")
-                        .HasForeignKey("PurchaserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("investmentsManagement.Server.Data.Models.Saller", null)
-                        .WithMany("Documents")
-                        .HasForeignKey("SallerId");
-
-                    b.Navigation("Attachmment");
-
-                    b.Navigation("Purchaser");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.SalePurchase", b =>
-                {
-                    b.HasOne("investmentsManagement.Server.Data.Models.Purchaser", "Purchaser")
-                        .WithOne("Property")
-                        .HasForeignKey("investmentsManagement.Server.Data.Models.SalePurchase", "PurchaserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("investmentsManagement.Server.Data.Models.Saller", "Saller")
-                        .WithMany("Properties")
-                        .HasForeignKey("SallerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Purchaser");
-
-                    b.Navigation("Saller");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.SalePurchaseAttachment", b =>
-                {
-                    b.HasOne("investmentsManagement.Server.Data.Models.Attachmments", "Attachmment")
-                        .WithMany()
-                        .HasForeignKey("AttachmmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("investmentsManagement.Server.Data.Models.SalePurchase", "SalePurchase")
-                        .WithMany("attachments")
-                        .HasForeignKey("SalePurchaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Attachmment");
-
-                    b.Navigation("SalePurchase");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.SallerDocuments", b =>
-                {
-                    b.HasOne("investmentsManagement.Server.Data.Models.Attachmments", "Attachmment")
-                        .WithMany()
-                        .HasForeignKey("AttachmmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("investmentsManagement.Server.Data.Models.Saller", "Saller")
-                        .WithMany()
-                        .HasForeignKey("SallerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Attachmment");
-
-                    b.Navigation("Saller");
-                });
-
             modelBuilder.Entity("investmentsManagement.Server.Data.Models.ExpenceTypes", b =>
                 {
                     b.Navigation("Expences");
@@ -955,26 +583,6 @@ namespace InventoryManagement.Server.Migrations
                     b.Navigation("Expences");
 
                     b.Navigation("Investment");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.Purchaser", b =>
-                {
-                    b.Navigation("Documents");
-
-                    b.Navigation("Property")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.SalePurchase", b =>
-                {
-                    b.Navigation("attachments");
-                });
-
-            modelBuilder.Entity("investmentsManagement.Server.Data.Models.Saller", b =>
-                {
-                    b.Navigation("Documents");
-
-                    b.Navigation("Properties");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,6 +13,7 @@ import { ProjectComponent } from '../components/project/project.component';
 import { ExpenseComponent } from '../components/expense/expense.component';
 import { ExpenseTypeComponent } from '../components/expense-type/expense-type.component';
 import { AuthenticationComponent } from '../components/authentication/authentication.component';
+import { PurchaserComponent } from './purchaser/purchaser.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthenticationComponent } from '../components/authentication/authentica
     ProjectComponent,
     ExpenseComponent,
     ExpenseTypeComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    PurchaserComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
