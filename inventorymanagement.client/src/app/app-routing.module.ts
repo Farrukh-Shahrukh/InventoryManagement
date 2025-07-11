@@ -7,6 +7,8 @@ import { ExpenseTypeComponent } from '../components/expense-type/expense-type.co
 import { ExpenseComponent } from '../components/expense/expense.component';
 import { AuthenticationComponent } from 'src/components/authentication/authentication.component';
 import { AuthGuard } from './auth-guard'; // Import the guard
+import { SallerComponent } from '../components/saller/saller.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/investors', pathMatch: 'full' }, 
@@ -16,6 +18,7 @@ const routes: Routes = [
   { path: 'projects', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: 'expenseTypes', component: ExpenseTypeComponent, canActivate: [AuthGuard] },
   { path: 'expenses', component: ExpenseComponent, canActivate: [AuthGuard] },
+  { path: 'saller', component: SallerComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

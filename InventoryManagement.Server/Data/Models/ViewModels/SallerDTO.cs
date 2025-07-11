@@ -6,8 +6,9 @@
         public string CNIC { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-        public virtual Saller Saller { get; set; }
-        public ICollection<SallerDocumentsDTO> Documents { get; set; }
-        public ICollection<SalePurchaseDTO> Properties { get; set; }
+        public IFormFileCollection Documents { get; set; }
+        //public virtual Saller Saller { get; set; }
+        //public ICollection<SallerDocumentsDTO> Documents { get; set; }
+        //public ICollection<SalePurchaseDTO> Properties { get; set; }
     }
 }

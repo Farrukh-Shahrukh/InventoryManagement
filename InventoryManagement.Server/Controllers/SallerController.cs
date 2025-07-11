@@ -37,7 +37,8 @@ namespace investmentsManagement.Server.Controllers
 
         // POST: api/Saller
         [HttpPost]
-        public ActionResult<SallerDTO> Create([FromBody] SallerDTO dto)
+        [Consumes("multipart/form-data")]
+        public ActionResult<SallerDTO> Create([FromForm] SallerDTO dto)
         {
             var created = _sallerService.CreateSaller(dto);
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);

@@ -14,6 +14,7 @@ import { ExpenseComponent } from '../components/expense/expense.component';
 import { ExpenseTypeComponent } from '../components/expense-type/expense-type.component';
 import { AuthenticationComponent } from '../components/authentication/authentication.component';
 import { PurchaserComponent } from './purchaser/purchaser.component';
+import { SallerComponent } from '../components/saller/saller.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PurchaserComponent } from './purchaser/purchaser.component';
     ExpenseComponent,
     ExpenseTypeComponent,
     AuthenticationComponent,
-    PurchaserComponent
+    PurchaserComponent,
+    SallerComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
