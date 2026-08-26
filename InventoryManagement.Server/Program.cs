@@ -23,6 +23,7 @@ namespace InventoryManagement.Server
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ISaleService, SaleService>();
             builder.Services.AddScoped<IPurchaseService, PurchaseService>();
+            builder.Services.AddScoped<IExpenceService, ExpenceService>();
 
             builder.Services.AddCors(options =>
             {

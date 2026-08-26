@@ -8,6 +8,7 @@ namespace InventoryManagement.Server.Data.Models.ViewModels
         public DateTime Date { get; set; }
         public BigInteger Amount { get; set; }
         public string Description { get; set; }
+        public string? PicturePath { get; set; }
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
 
